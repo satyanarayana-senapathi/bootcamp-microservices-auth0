@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mockserver-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mockserver-pod
+  template:
+    metadata:
+      labels:
+        app: mockserver-pod
+    spec:
+      containers:
+      - name: mockserver-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp2-mockserver:v3
+        ports:
+        - containerPort: 80
+      
+      imagePullSecrets:
+      - name: my-ghcr-secret
