@@ -1,10 +1,9 @@
 name: deploy mock server to ghcr and eks
-
 on:
   push:
     paths:
       - 'frontend/db/**'
-      - '.github/workflows/mockserver.yml'
+      - '.github/workflows/mockserver.yaml'
 
 jobs:
   build:    
@@ -21,7 +20,7 @@ jobs:
         with:
          registry: ghcr.io
          username: ${{ github.actor }}
-         password: ${{ secrets.GIT_PAT }}
+         password: ${{ secrets.GHCR_PAT }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
