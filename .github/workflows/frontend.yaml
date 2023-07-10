@@ -31,7 +31,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install --force
+        run: npm install --legacy-peer-deps
 
       - name: Build application
         run: npm run build
@@ -49,5 +49,19 @@ jobs:
           context: ./frontend
           push: true
           tags: ghcr.io/${{ github.actor }}/auth0-bootcamp-frontend:v${{ github.run_number }}
-    
-     
+        
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: adding eks-cluster
+        env: 
+          aws_region: ${{ secrets.AWS_REGION }}
+          cluster_name: ${{ secrets.CLUSTER_NAME }}
+          IMAGE: ghcr.io/${{ github.actor }}/auth0-bootcamp-frontend:v${{ github.run_number }}
+        run: |
+          aws eks --region $aws_region update-kubeconfig --name $cluster_name
+          kubectl set image deployment/frontend-deployment frontend-pod=$IMAGE
