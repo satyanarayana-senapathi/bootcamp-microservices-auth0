@@ -44,7 +44,7 @@ jobs:
           IMAGE: ghcr.io/${{ github.actor }}/auth0-bootcamp2-mockserver:v${{ github.run_number }}
         run: |
             aws eks --region $aws_region update-kubeconfig --name $cluster_name
-            kubectl set image deployment/mockserver-deploy mockserver-image=$IMAGE
+            kubectl set image deployment/mockserver-deployment mockserver-pod=$IMAGE
             
 
     
