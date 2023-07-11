@@ -59,22 +59,21 @@ jobs:
             
       - name: Run Strategy
         run: |
-           cd ${{ matrix.services }}
-           mvn clean package -DskipTests
-           docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }} .
-           docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
-           kubectl set image deployment/${{ matrix.services }}-deployment ${{ matrix.services }}-pod=ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
-           
+           if [[ "${{ github.event.head_commit.modified }}" == *"${{ matrix.services }}/".* ]]; then
+            cd ${{ matrix.services }}
+            mvn clean package -DskipTests
+            docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }} .
+            docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
+            kubectl set image deployment/${{ matrix.services }}-deployment ${{ matrix.services }}-pod=ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
+           else
+            echo "Skipping strategy for ${{ matrix.services }}"
+           fi
  
 
 
 
 
 
-    #   - name: Build and deploy Service 1
-    #     if: ${{ github.event.head_commit.modified.contains('address-service/') }}
-    #     working-directory: ./address-service
-    #     run: |
           
 
 
