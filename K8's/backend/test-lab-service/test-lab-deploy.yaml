@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-lab-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-lab-pod
+  template:
+    metadata:
+      labels:
+        app: test-lab-pod
+    spec:
+      containers:
+      - name: test-lab-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-test-lab-service:v2
+        ports:
+        - containerPort: 9006
+      
+      imagePullSecrets:
+      - name: my-ghcr-secret

@@ -27,3 +27,20 @@ spec:
             name: mockserver-service
             port:
               number: 3005
+  - host: bc.spcluster.tk
+    http:
+      paths:
+      - path: /eureka
+        pathType: Prefix
+        backend:
+          service:
+            name: service-registry-service
+            port:
+              number: 8761
+      - path: /cloud
+        pathType: Prefix
+        backend:
+          service:
+            name: cloud-gateway-service
+            port:
+              number: 9191

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patient-pod
+  template:
+    metadata:
+      labels:
+        app: patient-pod
+    spec:
+      containers:
+      - name: patient-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-patient-service:v2
+        ports:
+        - containerPort: 9005
+      
+      imagePullSecrets:
+      - name: my-ghcr-secret

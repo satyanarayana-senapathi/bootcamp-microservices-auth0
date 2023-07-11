@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-pod
+  template:
+    metadata:
+      labels:
+        app: user-pod
+    spec:
+      containers:
+      - name: user-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-user-service:v2
+        ports:
+        - containerPort: 9008
+      
+      imagePullSecrets:
+      - name: my-ghcr-secret

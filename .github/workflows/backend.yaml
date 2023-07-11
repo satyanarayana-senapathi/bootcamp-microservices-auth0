@@ -57,4 +57,35 @@ jobs:
 
 
 
-   
+    #   - name: Build and deploy Service 1
+    #     if: ${{ github.event.head_commit.modified.contains('address-service/') }}
+    #     working-directory: ./address-service
+    #     run: |
+          
+
+
+
+
+
+    #   - name: Build and Push Docker Image
+    #     uses: docker/build-push-action@v2
+    #     with:
+    #       context: ./backend
+    #       push: true
+    #       tags: ghcr.io/${{ github.actor }}/auth0-bootcamp-backend:v${{ github.run_number }}
+        
+    #   - name: Configure AWS Credentials
+    #     uses: aws-actions/configure-aws-credentials@v1
+    #     with:
+    #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #       aws-region: ${{ secrets.AWS_REGION }}
+
+    #   - name: adding eks-cluster
+    #     env: 
+    #       aws_region: ${{ secrets.AWS_REGION }}
+    #       cluster_name: ${{ secrets.CLUSTER_NAME }}
+    #       IMAGE: ghcr.io/${{ github.actor }}/auth0-bootcamp-backend:v${{ github.run_number }}
+    #     run: |
+    #       aws eks --region $aws_region update-kubeconfig --name $cluster_name
+    #       kubectl set image deployment/backend-deployment backend-pod=$IMAGE

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: card-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: card-pod
+  template:
+    metadata:
+      labels:
+        app: card-pod
+    spec:
+      containers:
+      - name: card-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-card-service:v2
+        ports:
+        - containerPort: 9003
+      
+      imagePullSecrets:
+      - name: my-ghcr-secret

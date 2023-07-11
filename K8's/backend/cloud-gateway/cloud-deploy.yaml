@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-gateway-pod
+  template:
+    metadata:
+      labels:
+        app: cloud-gateway-pod
+    spec:
+      containers:
+      - name: cloud-gateway-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-cloud-gateway:v2
+        ports:
+        - containerPort: 9191
+      
+      imagePullSecrets:
+      - name: my-ghcr-secret

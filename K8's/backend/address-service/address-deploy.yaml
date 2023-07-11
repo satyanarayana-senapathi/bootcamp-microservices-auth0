@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: address-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: address-pod
+  template:
+    metadata:
+      labels:
+        app: address-pod
+    spec:
+      containers:
+      - name: address-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-address-service:v2
+        ports:
+        - containerPort: 9001
+      
+      imagePullSecrets:
+      - name: my-ghcr-secret

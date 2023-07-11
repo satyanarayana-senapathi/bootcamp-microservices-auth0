@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appointment-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appointment-pod
+  template:
+    metadata:
+      labels:
+        app: appointment-pod
+    spec:
+      containers:
+      - name: appointment-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-appointment-service:v2
+        ports:
+        - containerPort: 9002
+      
+      imagePullSecrets:
+      - name: my-ghcr-secret

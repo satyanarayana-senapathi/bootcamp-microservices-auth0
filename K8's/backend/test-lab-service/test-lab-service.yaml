@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-lab-service
+spec:
+  selector:
+    app: test-lab-pod
+  ports:
+    - protocol: TCP
+      port: 9006
+      targetPort: 9006
