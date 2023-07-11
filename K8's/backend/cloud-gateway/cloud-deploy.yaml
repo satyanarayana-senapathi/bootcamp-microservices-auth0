@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cloud-gateway-pod
-        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-cloud-gateway:v2
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-cloud-gateway:v3
         ports:
         - containerPort: 9191
       

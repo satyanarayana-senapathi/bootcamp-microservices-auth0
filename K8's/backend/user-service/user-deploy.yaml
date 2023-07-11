@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-deployment
+  name: user-service-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-pod
+      app: user-service-pod
   template:
     metadata:
       labels:
-        app: user-pod
+        app: user-service-pod
     spec:
       containers:
-      - name: user-pod
-        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-user-service:v2
+      - name: user-service-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-user-service:v3
         ports:
         - containerPort: 9008
       

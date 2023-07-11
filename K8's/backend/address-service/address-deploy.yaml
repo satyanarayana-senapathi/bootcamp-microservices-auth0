@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: address-deployment
+  name: address-service-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: address-pod
+      app: address-service-pod
   template:
     metadata:
       labels:
-        app: address-pod
+        app: address-service-pod
     spec:
       containers:
-      - name: address-pod
-        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-address-service:v2
+      - name: address-service-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-address-service:v3
         ports:
         - containerPort: 9001
       

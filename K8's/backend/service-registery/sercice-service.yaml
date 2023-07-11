@@ -1,22 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: service-registry-deployment
+  name: service-registry-service
 spec:
-  replicas: 1
   selector:
-    matchLabels:
-      app: service-registry-pod
-  template:
-    metadata:
-      labels:
-        app: service-registry-pod
-    spec:
-      containers:
-      - name: service-registry-pod
-        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-service-registry:v2
-        ports:
-        - containerPort: 8761
-      
-      imagePullSecrets:
-      - name: my-ghcr-secret
+    app: service-registry-pod
+  ports:
+    - protocol: TCP
+      port: 8761
+      targetPort: 8761
+

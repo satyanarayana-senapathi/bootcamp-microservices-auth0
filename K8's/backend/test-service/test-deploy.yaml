@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-deployment
+  name: test-service-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test-pod
+      app: test-service-pod
   template:
     metadata:
       labels:
-        app: test-pod
+        app: test-service-pod
     spec:
       containers:
-      - name: test-pod
-        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-test-service:v2
+      - name: test-service-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-test-service:v3
         ports:
         - containerPort: 9007
       

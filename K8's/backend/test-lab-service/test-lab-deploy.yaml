@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-lab-deployment
+  name: test-lab-service-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test-lab-pod
+      app: test-lab-service-pod
   template:
     metadata:
       labels:
-        app: test-lab-pod
+        app: test-lab-service-pod
     spec:
       containers:
-      - name: test-lab-pod
-        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-test-lab-service:v2
+      - name: test-lab-service-pod
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-test-lab-service:v3
         ports:
         - containerPort: 9006
       
