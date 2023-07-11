@@ -15,8 +15,11 @@ spec:
       containers:
       - name: database-pod
         image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-database:v1
+        envFrom:
+            - secretRef:
+                name: database-secret   
         ports:
-        - containerPort: 80
+        - containerPort: 3306
       
       imagePullSecrets:
       - name: my-ghcr-secret
