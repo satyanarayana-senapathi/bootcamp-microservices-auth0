@@ -56,7 +56,7 @@ jobs:
           cluster_name: ${{ secrets.CLUSTER_NAME }}
         run: |
             aws eks --region $aws_region update-kubeconfig --name $cluster_name
-            
+            echo ${{ github.event.head_commit.modified }} 
       - name: Run Strategy
         run: |
            if [[ "${{ github.event.head_commit.modified }}" == *"${{ matrix.services }}/".* ]]; then
@@ -102,3 +102,19 @@ jobs:
     #     run: |
     #       aws eks --region $aws_region update-kubeconfig --name $cluster_name
     #       kubectl set image deployment/backend-deployment backend-pod=$IMAGE
+
+
+
+#     - name: Check Code Changes
+#     id: code_changes
+#     run: |
+#       echo "::set-output name=changed::false"
+#       for file in $(git diff --name-only HEAD HEAD^); do
+#         if [[ $file == "${{ matrix.directory }}/"* ]]; then
+#           echo "::set-output name=changed::true"
+#           break
+#         fi
+#       done
+
+#   - name: Run Strategy
+#     if: steps.code_changes.outputs.changed == 'true'
