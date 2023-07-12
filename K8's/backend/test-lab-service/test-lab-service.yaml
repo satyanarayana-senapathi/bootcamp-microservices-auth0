@@ -4,7 +4,7 @@ metadata:
   name: test-lab-service
 spec:
   selector:
-    app: test-lab-pod
+   app: test-lab-service-pod
   ports:
     - protocol: TCP
       port: 9006

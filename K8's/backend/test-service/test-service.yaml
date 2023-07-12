@@ -4,7 +4,7 @@ metadata:
   name: test-service
 spec:
   selector:
-    app: test-pod
+    app: test-service-pod
   ports:
     - protocol: TCP
       port: 9007

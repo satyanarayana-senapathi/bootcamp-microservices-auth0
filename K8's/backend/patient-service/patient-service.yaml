@@ -4,7 +4,7 @@ metadata:
   name: patient-service
 spec:
   selector:
-    app: patient-pod
+    app: patient-service-pod
   ports:
     - protocol: TCP
       port: 9005

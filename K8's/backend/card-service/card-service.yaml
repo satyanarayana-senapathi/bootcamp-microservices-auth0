@@ -4,7 +4,7 @@ metadata:
   name: card-service
 spec:
   selector:
-    app: card-pod
+    app: card-service-pod
   ports:
     - protocol: TCP
       port: 9003

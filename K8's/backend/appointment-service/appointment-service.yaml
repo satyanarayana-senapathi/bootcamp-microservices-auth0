@@ -4,7 +4,7 @@ metadata:
   name: appointment-service
 spec:
   selector:
-    app: appointment-pod
+    app: appointment-service-pod
   ports:
     - protocol: TCP
       port: 9002
