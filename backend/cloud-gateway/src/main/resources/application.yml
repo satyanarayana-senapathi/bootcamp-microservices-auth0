@@ -16,42 +16,42 @@ spring:
             allowedHeaders: "*"
       routes:
         - id: LAB-SERVICE
-          uri: lb://lab-service
+          uri: lab-service
           predicates:
             - Path=/labs/**
 
         - id: CARD-SERVICE
-          uri: lb://card-service
+          uri: card-service
           predicates:
             - Path=/cards/**
 
         - id: USER-SERVICE
-          uri: lb://user-service
+          uri: user-service
           predicates:
             - Path=/user/**
 
         - id: ADDRESS-SERVICE
-          uri: lb://address-service
+          uri: address-service
           predicates:
             - Path=/address/**
 
         - id: APPOINTMENT-SERVICE
-          uri: lb://appointment-service
+          uri: appointment-service
           predicates:
             - Path=/appointments/**
 
         - id: TEST-SERVICE
-          uri: lb://test-service
+          uri: test-service
           predicates:
             - Path=/tests/**
 
         - id: PATIENT-SERVICE
-          uri: lb://patient-service
+          uri: patient-service
           predicates:
             - Path=/patients/** 
 
         - id: TEST-LAB-SERVICE
-          uri: lb://test-lab-service
+          uri: test-lab-service
           predicates:
             - Path=/testlabs/**
 
