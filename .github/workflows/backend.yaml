@@ -111,5 +111,3 @@ jobs:
 #         fi
 #       done
 
-#   - name: Run Strategy
-#     if: steps.code_changes.outputs.changed == 'true'
