@@ -4,6 +4,7 @@ metadata:
   name: my-ingress
   annotations: 
     nginx.ingress.kubernetes.io/rewrite-target: /
+  
 spec:
   ingressClassName: nginx
   rules:
@@ -30,7 +31,7 @@ spec:
   - host: bc.spcluster.tk
     http:
       paths:
-      - path: /eureka
+      - path: /
         pathType: Prefix
         backend:
           service:
@@ -44,3 +45,10 @@ spec:
             name: cloud-gateway-service
             port:
               number: 9191
+      - path: /api/address/(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: address-service
+            port:
+              number: 9001

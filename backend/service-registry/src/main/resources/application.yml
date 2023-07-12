@@ -8,4 +8,5 @@ eureka:
   server:
     waitTimeInMsWhenSyncEmpty: 0
   instance:
-    hostname: bc.spcluster.tk
+    hostname:  service-registry-service
+

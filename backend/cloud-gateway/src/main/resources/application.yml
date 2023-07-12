@@ -62,4 +62,4 @@ eureka:
     service-url:
       defaultZone: https://bc.spcluster.tk/eureka/
   instance:
-    hostname: bc.spcluster.tk
+    hostname: cloud-gateway-service
