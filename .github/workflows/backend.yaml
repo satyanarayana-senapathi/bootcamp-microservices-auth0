@@ -35,13 +35,23 @@ jobs:
         with:
           distribution: 'corretto' 
           java-version: '17'
-          
+
+      - name: Determine base commit
+        id: base_commit
+        run: |
+          if git rev-parse --verify HEAD >/dev/null 2>&1; then
+            echo "::set-output name=commit::$(git rev-parse HEAD)"
+          else
+            echo "::set-output name=commit::$(git hash-object -t tree /dev/null)"
+          fi
+
       - name: Check changed files
         id: check_files
         run: |
-          changed_files=$(git diff --name-only HEAD~1)
+          base_commit="${{ steps.base_commit.outputs.commit }}"
+          changed_files=$(git diff --name-only $base_commit)
           echo "::set-output name=files::$changed_files"
-          echo "files: $changed_files"
+          echo "Changed files: $changed_files"
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
