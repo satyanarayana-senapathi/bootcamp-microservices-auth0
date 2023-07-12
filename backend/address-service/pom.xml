@@ -78,7 +78,6 @@
 		</dependency>
 		<!-- FLyWay dependency End-->
 	</dependencies>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

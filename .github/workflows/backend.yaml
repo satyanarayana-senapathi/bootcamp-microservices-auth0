@@ -35,6 +35,13 @@ jobs:
         with:
           distribution: 'corretto' 
           java-version: '17'
+          
+      - name: Check changed files
+        id: check_files
+        run: |
+          changed_files=$(git diff --name-only HEAD~1)
+          echo "::set-output name=files::$changed_files"
+          echo "files: $changed_files"
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -65,12 +72,7 @@ jobs:
             kubectl set image deployment/${{ matrix.services }}-deployment ${{ matrix.services }}-pod=ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
  
 
-      - name: Check changed files
-        id: check_files
-        run: |
-          changed_files=$(git diff --name-only HEAD~1)
-          echo "::set-output name=files::$changed_files"
-          echo "files: $changed_files"
+     
           
 
 
