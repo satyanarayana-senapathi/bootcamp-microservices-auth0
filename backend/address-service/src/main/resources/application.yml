@@ -10,6 +10,6 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: https://bc.spcluster.tk/eureka/
+      defaultZone: https://localhost:8761/eureka/
   instance:
-    hostname: address-service
+    hostname: adddddddddddd

@@ -14,9 +14,18 @@ spec:
     spec:
       containers:
       - name: address-service-pod
-        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-address-service:v3
+        image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-address-service:v2
         ports:
         - containerPort: 9001
-      
+        envFrom:
+            - secretRef:
+                name: database-secret
+        env:
+          - name: eureka.client.service-url.defaultZone
+            value: https://bc.spcluster.tk/eureka/
+
+          - name: eureka.instance.hostname
+            value: address-service
+    
       imagePullSecrets:
       - name: my-ghcr-secret
