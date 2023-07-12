@@ -67,10 +67,21 @@ jobs:
             fi
           done
       - name: Run Strategy
-        if: ${{ steps.code_changes.outputs.changed == 'true' }}
         run: |
             cd ${{ matrix.services }}
             mvn clean package -DskipTests
             docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }} .
             docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
             kubectl set image deployment/${{ matrix.services }}-deployment ${{ matrix.services }}-pod=ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
+ 
+
+
+
+
+
+          
+
+
+
+
+
