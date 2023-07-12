@@ -38,10 +38,17 @@ spec:
             name: service-registry-service
             port:
               number: 8761
-      - path: /api/(.*)
+      - path: /api/
         pathType: Prefix
         backend:
           service:
             name: cloud-gateway-service
             port:
               number: 9191
+      - path: /address/
+        pathType: Prefix
+        backend:
+          service:
+            name: address-service
+            port:
+              number: 9001

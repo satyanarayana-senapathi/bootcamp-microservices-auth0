@@ -16,44 +16,44 @@ spring:
             allowedHeaders: "*"
       routes:
         - id: LAB-SERVICE
-          uri: lab-service
+          uri: lb://LAB-SERVICE
           predicates:
-            - Path=/labs/**
+            - Path=/api/labs/**
 
         - id: CARD-SERVICE
-          uri: card-service
+          uri: lb://CARD-SERVICE
           predicates:
-            - Path=/cards/**
+            - Path=/api/cards/**
 
         - id: USER-SERVICE
-          uri: user-service
+          uri: lb://USER-SERVICE
           predicates:
-            - Path=/user/**
+            - Path=/api/user/**
 
         - id: ADDRESS-SERVICE
-          uri: address-service
+          uri: lb://ADDRESS-SERVICE
           predicates:
-            - Path=/address/**
+            - Path=/api/address/**
 
         - id: APPOINTMENT-SERVICE
-          uri: appointment-service
+          uri: lb://APPOINTMENT-SERVICE
           predicates:
-            - Path=/appointments/**
+            - Path=/api/appointments/**
 
         - id: TEST-SERVICE
-          uri: test-service
+          uri: lb://TEST-SERVICE
           predicates:
-            - Path=/tests/**
+            - Path=/api/tests/**
 
         - id: PATIENT-SERVICE
-          uri: patient-service
+          uri: lb://PATIENT-SERVICE
           predicates:
-            - Path=/patients/** 
+            - Path=/api/patients/** 
 
         - id: TEST-LAB-SERVICE
-          uri: test-lab-service
+          uri: lb://TEST-LAB-SERVICE
           predicates:
-            - Path=/testlabs/**
+            - Path=/api/testlabs/**
 
 eureka:
   client:
