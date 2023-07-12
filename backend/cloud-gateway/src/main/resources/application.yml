@@ -18,42 +18,42 @@ spring:
         - id: LAB-SERVICE
           uri: lb://LAB-SERVICE
           predicates:
-            - Path=/api/labs/**
+            - Path=/labs/**
 
         - id: CARD-SERVICE
           uri: lb://CARD-SERVICE
           predicates:
-            - Path=/api/cards/**
+            - Path=/cards/**
 
         - id: USER-SERVICE
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/api/user/**
+            - Path=/user/**
 
         - id: ADDRESS-SERVICE
           uri: lb://ADDRESS-SERVICE
           predicates:
-            - Path=/api/address/**
+            - Path=/address/**
 
         - id: APPOINTMENT-SERVICE
           uri: lb://APPOINTMENT-SERVICE
           predicates:
-            - Path=/api/appointments/**
+            - Path=/appointments/**
 
         - id: TEST-SERVICE
           uri: lb://TEST-SERVICE
           predicates:
-            - Path=/api/tests/**
+            - Path=/tests/**
 
         - id: PATIENT-SERVICE
           uri: lb://PATIENT-SERVICE
           predicates:
-            - Path=/api/patients/** 
+            - Path=/patients/** 
 
         - id: TEST-LAB-SERVICE
           uri: lb://TEST-LAB-SERVICE
           predicates:
-            - Path=/api/testlabs/**
+            - Path=/testlabs/**
 
 eureka:
   client:
