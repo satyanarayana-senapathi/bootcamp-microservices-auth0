@@ -56,16 +56,6 @@ jobs:
           cluster_name: ${{ secrets.CLUSTER_NAME }}
         run: |
             aws eks --region $aws_region update-kubeconfig --name $cluster_name
-      - name: Check Code Changes
-        id: code_changes
-        run: |
-          echo "::set-output name=changed::false"
-          for file in $(git diff --name-only HEAD HEAD^); do
-            if [[ $file == "${{ matrix.directory }}/"* ]]; then
-              echo "::set-output name=changed::true"
-              break
-            fi
-          done
       - name: Run Strategy
         run: |
             cd ${{ matrix.services }}
@@ -75,6 +65,13 @@ jobs:
             kubectl set image deployment/${{ matrix.services }}-deployment ${{ matrix.services }}-pod=ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
  
 
+      - name: Check changed files
+        id: check_files
+        run: |
+          changed_files=$(git diff --name-only HEAD~1)
+          echo "::set-output name=files::$changed_files"
+          echo "files: $changed_files"
+          
 
 
 

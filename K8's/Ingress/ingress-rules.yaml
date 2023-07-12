@@ -4,14 +4,8 @@ metadata:
   name: my-ingress
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    # nginx.ingress.kubernetes.io/default-backend: cloud-gateway-service
 
 spec:
-  defaultBackend:
-   service:
-     name: cloud-gateway-service
-     port:
-       number: 9191
   ingressClassName: nginx
   rules:
   - host: fr.spcluster.tk
@@ -102,3 +96,27 @@ spec:
             name: user-service
             port:
               number: 9008
+  - host: api.spcluster.tk
+    http:
+      paths:
+      - path: /?
+        pathType: Exact
+        backend:
+          service:
+            name: service-registry-service
+            port:
+              number: 8761
+      - path: /eureka
+        pathType: Prefix
+        backend:
+          service:
+            name: service-registry-service
+            port:
+              number: 8761
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cloud-gateway-service
+            port:
+              number: 9191
