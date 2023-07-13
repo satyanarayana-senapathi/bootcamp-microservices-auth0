@@ -1,4 +1,4 @@
-FROM openjdk:17 
+FROM openjdk:11 
 
 ADD target/*.jar app.jar
 

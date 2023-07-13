@@ -99,7 +99,7 @@ spec:
   - host: api.spcluster.tk
     http:
       paths:
-      - path: /?
+      - path: /$
         pathType: Exact
         backend:
           service:
