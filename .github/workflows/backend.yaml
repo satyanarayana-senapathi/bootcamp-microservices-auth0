@@ -94,7 +94,6 @@ jobs:
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               path=$(echo "$file" | cut -d'/' -f2)
               uniqueFiles["$path"]=1
-              echo "$path was changed"
             done
 
             echo "Unique changed files:"
@@ -107,6 +106,9 @@ jobs:
                     cd $path
                     mvn clean package -DskipTests
                     docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }} .
+                    docker tag ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:latest
+                    docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
+                    docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:latest
                 fi
             done
 
