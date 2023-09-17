@@ -109,7 +109,7 @@ jobs:
                     docker tag ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }} ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:latest
                     docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }}
                     docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:latest
-                fi--
+                fi
             done
 
 
