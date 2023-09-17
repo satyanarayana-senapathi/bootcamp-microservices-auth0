@@ -13,4 +13,6 @@ public class CloudGatewayApplication {
 		SpringApplication.run(CloudGatewayApplication.class, args);
 	}
 
+
+
 }
