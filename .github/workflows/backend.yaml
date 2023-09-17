@@ -94,7 +94,6 @@ jobs:
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               path=$(echo "$file" | cut -d'/' -f2)
               uniqueFiles["$path"]=1
-              cd $path
               echo "$path was changed"
             done
 
