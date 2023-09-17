@@ -93,11 +93,22 @@ jobs:
             
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               path=$(echo "$file" | cut -d'/' -f2)
-              uniqueFiles["$file"]=1
+              uniqueFiles["$path"]=1
+              cd $path
+              echo "$path was changed"
             done
+
             echo "Unique changed files:"
             for file in "${!uniqueFiles[@]}"; do
                 echo "$file"
+            done
+
+            for path in "${!uniqueFiles[@]}"; do
+                if [[ "$path" == "${{ matrix.services }}" ]]; then
+                    cd $path
+                    mvn clean package -DskipTests
+                    docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }} .
+                fi
             done
 
 
