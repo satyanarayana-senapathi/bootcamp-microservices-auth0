@@ -93,7 +93,7 @@ jobs:
               path=$(echo "$file" | cut -d'/' -f2)
               cd $path
               echo "$path was changed"
-               if [[ `$path` == `${{ matrix.services }}` ]]; then
+               if [[ "$path" == "${{ matrix.services }}" ]]; then
                   mvn clean package -DskipTests
                   docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }} .
               fi
