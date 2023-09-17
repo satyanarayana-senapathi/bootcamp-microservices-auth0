@@ -89,15 +89,15 @@ jobs:
       #       aws eks --region $aws_region update-kubeconfig --name $cluster_name
       - name: Run Strategy
         run: |
+            declare -A uniqueFiles
+            
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               path=$(echo "$file" | cut -d'/' -f2)
-              cd $path
-              echo "$path was changed"
-               if [[ "$path" == "${{ matrix.services }}" ]]; then
-                  mvn clean package -DskipTests
-                  docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{ matrix.services }}:v${{ github.run_number }} .
-              fi
-             
+              uniqueFiles["$file"]=1
+            done
+            echo "Unique changed files:"
+            for file in "${!uniqueFiles[@]}"; do
+                echo "$file"
             done
 
 
