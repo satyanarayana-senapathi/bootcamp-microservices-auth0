@@ -27,5 +27,6 @@ spec:
           - name: EUREKA_INSTANCE_HOSTNAME
             value: address-service
     
+    
       imagePullSecrets:
       - name: my-ghcr-secret

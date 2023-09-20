@@ -41,6 +41,8 @@ jobs:
             done  
           done
           echo "::set-output name=changed-services::$(IFS=,; echo "${changed_services[*]}")"
+          echo "Changed services: ${changed_services[*]}"
+      
         
   deploy:
     runs-on: ubuntu-latest
@@ -65,19 +67,19 @@ jobs:
          username: ${{ github.actor }}
          password: ${{ secrets.GHCR_PAT }}
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: adding eks-cluster
-        env: 
-          aws_region: ${{ secrets.AWS_REGION }}
-          cluster_name: ${{ secrets.CLUSTER_NAME }}
-        run: |
-            aws eks --region $aws_region update-kubeconfig --name $cluster_name
+      # - name: adding eks-cluster
+      #   env: 
+      #     aws_region: ${{ secrets.AWS_REGION }}
+      #     cluster_name: ${{ secrets.CLUSTER_NAME }}
+      #   run: |
+      #       aws eks --region $aws_region update-kubeconfig --name $cluster_name
       - name: Run Strategy
         run: |
             IFS=',' read -ra changed_services <<< "${{ needs.filesChanged.outputs.changed-services }}"
