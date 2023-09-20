@@ -17,8 +17,7 @@ spec:
         image: ghcr.io/satyanarayana-senapathi/auth0-bootcamp-backend-appointment-service:v3
         ports:
         - containerPort: 9002
-      
-
+    
       
       imagePullSecrets:
       - name: my-ghcr-secret
