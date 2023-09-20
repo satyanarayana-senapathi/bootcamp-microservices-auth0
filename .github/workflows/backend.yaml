@@ -41,8 +41,9 @@ jobs:
             done  
           done
           echo "::set-output name=changed-services::[\"$(IFS=\",\"; echo "${changed_services[*]}")\"]"
+          echo "Changed services JSON: [\"$(IFS=\",\"; echo "${changed_services[*]}")\"]"
 
-          echo "Changed services: ${changed_services[*]}"
+          echo "Changed services normal: ${changed_services[*]}"
       
         
   deploy:
