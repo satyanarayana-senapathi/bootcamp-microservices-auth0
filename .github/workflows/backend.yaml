@@ -92,10 +92,10 @@ jobs:
         run: |
           cd ${{matrix.service}}
           mvn clean package -DskipTests
-          docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }} .
-          docker tag ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }} ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:latest
-          docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }}
-          docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:latest
+          docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{matrix.service}}:v${{ github.run_number }} .
+          docker tag ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{matrix.service}}:v${{ github.run_number }} ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{matrix.service}}:latest
+          docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{matrix.service}}:v${{ github.run_number }}
+          docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-${{matrix.service}}:latest
 
 
 # name: BOOTCAMP - BACKEND deployment 
