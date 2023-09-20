@@ -40,7 +40,8 @@ jobs:
                 fi
             done  
           done
-          echo "::set-output name=changed-services::$(IFS=,; echo "${changed_services[*]}")"
+          echo "::set-output name=changed-services::[\"$(IFS=\",\"; echo "${changed_services[*]}")\"]"
+
           echo "Changed services: ${changed_services[*]}"
       
         
@@ -51,6 +52,9 @@ jobs:
     defaults:
       run:
         working-directory: backend
+    strategy:
+      matrix:
+        service: ${{fromJson(needs.filesChanged.outputs.changed-services)}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -82,15 +86,13 @@ jobs:
       #       aws eks --region $aws_region update-kubeconfig --name $cluster_name
       - name: Run Strategy
         run: |
-            IFS=',' read -ra changed_services <<< "${{ needs.filesChanged.outputs.changed-services }}"
-            for path in "${changed_services[@]}"; do
-                cd $path
-                mvn clean package -DskipTests
-                docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }} .
-                docker tag ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }} ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:latest
-                docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }}
-                docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:latest
-            done
+          cd ${{matrix.service}}
+          mvn clean package -DskipTests
+          docker build -t ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }} .
+          docker tag ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }} ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:latest
+          docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:v${{ github.run_number }}
+          docker push ghcr.io/${{ github.actor }}/auth0-bootcamp-backend-$path:latest
+
 
 # name: BOOTCAMP - BACKEND deployment 
 # run-name: Backend deployment update triggered by ${{ github.actor }}.
