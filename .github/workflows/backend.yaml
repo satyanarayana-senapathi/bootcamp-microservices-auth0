@@ -33,8 +33,16 @@ jobs:
           services=("address-service" "user-service" "appointment-service" "card-service" "cloud-gateway" "lab-service" "patient-service" "service-registry" "test-lab-service" "test-service")  
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             path=$(echo "$file" | cut -d'/' -f2)
+            already_exists=false
+            for changed in "${changed_services[@]}"; do
+                if [[ $changed == $path ]]; then
+                    # If it exists, set a flag and break
+                    already_exists=true
+                    break
+                fi
+            done
             for service in "${services[@]}"; do
-                if [[ $service == $path ]]; then
+                if [[ $already_exists == false && $service == $path ]]; then
                     changed_services+=("$path")
                     break
                 fi
