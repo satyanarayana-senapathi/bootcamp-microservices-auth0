@@ -18,5 +18,7 @@ spec:
         ports:
         - containerPort: 9002
       
+
+      
       imagePullSecrets:
       - name: my-ghcr-secret
