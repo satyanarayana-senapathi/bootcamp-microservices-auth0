@@ -40,9 +40,12 @@ jobs:
                 fi
             done  
           done
-          echo "::set-output name=changed-services::[\"$(IFS=\",\"; echo "${changed_services[*]}")\"]"
-          echo "Changed services JSON: [\"$(IFS=\",\"; echo "${changed_services[*]}")\"]"
-
+          json_array="[\"${changed_services[0]}\""
+          for i in "${changed_services[@]:1}"; do
+              json_array+=",\"$i\""
+          done
+          json_array+="]"
+          echo "::set-output name=changed-services::$json_array"
           echo "Changed services normal: ${changed_services[*]}"
       
         
