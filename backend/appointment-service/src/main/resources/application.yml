@@ -12,4 +12,4 @@ eureka:
     service-url:
       defaultZone: https://bc.spcluster.tk/eureka/
   instance:
-    hostname: appointment-sernrr
+    hostname: appointment-service

@@ -8,5 +8,5 @@ eureka:
   server:
     waitTimeInMsWhenSyncEmpty: 0
   instance:
-    hostname:  service-registry-service
+    hostname:  service-registry-servic
 

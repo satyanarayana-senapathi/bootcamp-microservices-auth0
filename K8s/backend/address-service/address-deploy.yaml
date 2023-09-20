@@ -21,6 +21,7 @@ spec:
             - secretRef:
                 name: database-secret
         env:
+        
           - name: EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE
             value: https://bc.spcluster.tk/eureka/
           - name: EUREKA_INSTANCE_HOSTNAME
