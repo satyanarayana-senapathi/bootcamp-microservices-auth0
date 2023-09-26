@@ -32,8 +32,13 @@ jobs:
         run: | 
           changed_services=()
           services=("address-service" "user-service" "appointment-service" "card-service" "cloud-gateway" "lab-service" "patient-service" "service-registry" "test-lab-service" "test-service")  
-          if [[ -f .github/workflows/backend.yaml ]]; then
-              changed_services=("${services[@]}")
+          
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              path=$(echo "$file" | cut -d'/' -f3)
+              if [[ "backend.yaml" == $path ]]; then
+                  changed_services=("${services[@]}")
+                  break
+              fi
           else
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               path=$(echo "$file" | cut -d'/' -f2)
