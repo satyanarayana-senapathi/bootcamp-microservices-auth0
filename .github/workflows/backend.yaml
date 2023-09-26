@@ -32,40 +32,48 @@ jobs:
         run: | 
           changed_services=()
           services=("address-service" "user-service" "appointment-service" "card-service" "cloud-gateway" "lab-service" "patient-service" "service-registry" "test-lab-service" "test-service")  
-          
+
+          backend_changed=false
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               path=$(echo "$file" | cut -d'/' -f3)
               if [[ "backend.yaml" == $path ]]; then
                   changed_services=("${services[@]}")
+                  backend_changed=true
                   break
               fi
-          else
-            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              path=$(echo "$file" | cut -d'/' -f2)
-              already_exists=false
-              for changed in "${changed_services[@]}"; do
-                  if [[ $changed == $path ]]; then
-                      already_exists=true
-                      break
+          done
+
+          if [[ $backend_changed == false ]]; then
+              for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+                  path=$(echo "$file" | cut -d'/' -f2)
+                  already_exists=false
+                  for changed in "${changed_services[@]}"; do
+                      if [[ $changed == $path ]]; then
+                          already_exists=true
+                          break
+                      fi
+                  done
+                  if [[ $already_exists == false ]]; then
+                      for service in "${services[@]}"; do
+                          if [[ $service == $path ]]; then
+                              changed_services+=("$path")
+                              break
+                          fi
+                      done  
                   fi
               done
-              for service in "${services[@]}"; do
-                  if [[ $already_exists == false && $service == $path ]]; then
-                      changed_services+=("$path")
-                      break
-                  fi
-              done  
-            done
-
-            json_array="[\"${changed_services[0]}\""
-            for i in "${changed_services[@]:1}"; do
-                json_array+=",\"$i\""
-            done
-            json_array+="]"
           fi
+
+          json_array="[\"${changed_services[0]}\""
+          for i in "${changed_services[@]:1}"; do
+              json_array+=",\"$i\""
+          done
+          json_array+="]"
+
           echo "::set-output name=changed-services::$json_array"
           echo "Changed services normal: ${changed_services[*]}"
-      
+
+                
         
   deploy:
     runs-on: ubuntu-latest
