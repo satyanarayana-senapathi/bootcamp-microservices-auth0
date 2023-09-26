@@ -52,7 +52,7 @@ jobs:
             done  
           done
 
-          if [[ $workflow_file == ]$backendfile ]; then
+          if [[ $workflow_file == $backendfile ]]; then
               changed_services=("${services[@]}")
           fi
 
