@@ -32,7 +32,7 @@ jobs:
         run: | 
           changed_services=()
           services=("address-service" "user-service" "appointment-service" "card-service" "cloud-gateway" "lab-service" "patient-service" "service-registry" "test-lab-service" "test-service")  
-          backendfile= "backend.yaml"
+          backendfile="backend.yaml"
           workflow_changed= false
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             path=$(echo "$file" | cut -d'/' -f2)
